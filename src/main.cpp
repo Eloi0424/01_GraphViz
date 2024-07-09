@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 
 #include "SimpleGraph.h"
 
@@ -9,11 +10,11 @@ using std::endl;
 
 void Welcome();
 void ReadGraph();
+void InitGraph();
 
+const double kPi = 3.14159265358979323;
 
-
-
-
+int Node_n;
 SimpleGraph graph;
 
 // Main method
@@ -22,6 +23,8 @@ int main()
     Welcome();
 
     ReadGraph();
+
+    InitGraph();
 
     InitGraphVisualizer(graph);
     DrawGraph(graph);
@@ -45,24 +48,21 @@ void ReadGraph()
     char graphName[100];
     cin >> graphName;
     freopen(graphName, "r", stdin);
-
-    int n;
     size_t u, v;
-    cin >> n;
-    cout << n << endl;
-
-    for(int i=1;i<=n;i++)
-    {
-        graph.nodes.push_back(Node{(double)i,(double)i});
-    }
-
-
-
+    cin >> Node_n;
     while (cin >> u >> v)
     {
-        cout << u << " " << v << endl;
         graph.edges.push_back(Edge{u, v});
     }
     cout << "Read graph compelete" << endl;
     fclose(stdin);
+}
+
+void InitGraph()
+{
+    for (int i = 1; i <= Node_n; i++)
+    {
+        graph.nodes.push_back(Node{cos(2 * kPi * i / Node_n), sin(2 * kPi * i / Node_n)});
+    }
+    cout << "Init graph node position compelete" << endl;
 }
