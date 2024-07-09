@@ -8,7 +8,11 @@ using std::cout;
 using std::endl;
 
 void Welcome();
-SimpleGraph ReadGraph();
+void ReadGraph();
+
+
+
+
 
 SimpleGraph graph;
 
@@ -18,6 +22,9 @@ int main()
     Welcome();
 
     ReadGraph();
+
+    InitGraphVisualizer(graph);
+    DrawGraph(graph);
 
     return 0;
 }
@@ -32,17 +39,30 @@ void Welcome()
     cout << endl;
 }
 
-SimpleGraph ReadGraph()
+void ReadGraph()
 {
     cout << "Input you graph name" << endl;
     char graphName[100];
     cin >> graphName;
-    freopen(graphName,"r",stdin);
+    freopen(graphName, "r", stdin);
 
+    int n;
+    size_t u, v;
+    cin >> n;
+    cout << n << endl;
+
+    for(int i=1;i<=n;i++)
+    {
+        graph.nodes.push_back(Node{(double)i,(double)i});
+    }
+
+
+
+    while (cin >> u >> v)
+    {
+        cout << u << " " << v << endl;
+        graph.edges.push_back(Edge{u, v});
+    }
+    cout << "Read graph compelete" << endl;
     fclose(stdin);
-
-
-
-
-    return SimpleGraph();
 }
