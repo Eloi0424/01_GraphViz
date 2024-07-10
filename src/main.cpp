@@ -14,8 +14,11 @@ void ReadGraph();
 void InitGraph();
 
 const double kPi = 3.14159265358979323;
+const double kRepel = 0.001;
+const double kAttract = 0.001;
 
 int Node_n;
+int Edge_m;
 double timeLimit;
 SimpleGraph graph;
 
@@ -57,6 +60,7 @@ void ReadGraph()
     while (cin >> u >> v)
     {
         graph.edges.push_back(Edge{u, v});
+        Edge_m++;
     }
     cout << "Read graph compelete" << endl;
     fclose(stdin);
@@ -82,12 +86,12 @@ void ForceDirectLayoutAlgo()
         elapsedTime = difftime(time(NULL), startTime);
         if (elapsedTime > timeLimit)
             break;
-        for(int i=0;i<Node_n;i++)
+        double fRepel, fAttract;
+        for (int i = 0; i < Edge_m; i++)
         {
-            for(int j=0;j<Node_n;j++)
-            {
-                forces[i].first
-            }
+            fRepel = kRepel / sqrt(pow(graph.edges[i].start - graph.edges[i].end, 2) + pow(graph.nodes[i].y - graph.nodes[j].y, 2));
+            fAttract = kAttract * (pow(graph.nodes[i].x - graph.nodes[j].x, 2) + pow(graph.nodes[i].y - graph.nodes[j].y, 2));
+            forces[i].
         }
     }
 }
